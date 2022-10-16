@@ -52,8 +52,7 @@ Uma aplicação **full-stack** desenvolvida para a empresa Planium, com o objeti
 3- npm run dev para rodar o back-end;
 ```
 4- npm run start para rodar o front-end.
-<br>
-<br>
+```
 
 ## OBSERVAÇÕES: 
 
@@ -62,5 +61,8 @@ beneficiários e de propostas.json como pedido, mas não vai formatado corretame
 Ao invés de incrementar um beneficiário em seguida do outro, um objeto dentro do array já existente, ele simplesmente cria outro array. Não consegui fazer o incremente.
 
 - Por isso, no front-end acontece a mesma coisa: ao adicionar um novo beneficiário no front-end, é necessário repetir os passos acima no back para fazê-los aparecer na tela, no botão de beneficiários.
+
+
+
 
 
