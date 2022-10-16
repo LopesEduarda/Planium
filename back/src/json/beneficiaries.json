@@ -1,0 +1,34 @@
+[
+    {
+        "quantity": 2,
+        "plan": 2,
+        "beneficiaries": [
+            {
+                "name": "Adeir",
+                "age": 27,
+                "price": 30
+            },
+            {
+                "name": "João",
+                "age": 15,
+                "price": 20
+            }
+        ]
+    },
+    {
+        "quantity": 2,
+        "plan": 1,
+        "beneficiaries": [
+            {
+                "name": "Eduarda",
+                "age": 23,
+                "price": 12
+            },
+            {
+                "name": "Matheus",
+                "age": 13,
+                "price": 10
+            }
+        ]
+    }
+]

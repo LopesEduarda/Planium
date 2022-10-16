@@ -1,0 +1,38 @@
+[
+    {
+        "id": "03c6d2be-ee72-47cf-a6d3-2c07e5e91c0e",
+        "quantity": 2,
+        "plan": 2,
+        "beneficiaries": [
+            {
+                "name": "Adeir",
+                "age": 27,
+                "price": 30
+            },
+            {
+                "name": "João",
+                "age": 15,
+                "price": 20
+            }
+        ],
+        "finalPrice": 50
+    },
+    {
+        "id": "e7359796-ebbd-4c49-8850-e9ec52f7fc16",
+        "quantity": 2,
+        "plan": 1,
+        "beneficiaries": [
+            {
+                "name": "Eduarda",
+                "age": 23,
+                "price": 12
+            },
+            {
+                "name": "Matheus",
+                "age": 13,
+                "price": 10
+            }
+        ],
+        "finalPrice": 22
+    }
+]
