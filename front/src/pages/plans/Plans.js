@@ -1,19 +1,24 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { url } from './../../constants/baseUrl';
+import { goBack } from '../../router/Coordinator';
+import { useNavigate } from 'react-router';
+import Card from 'react-bootstrap/Card';
+import { DivMain, TitleH2 } from './style'
 
 export const Plans = () => {
     const [plans, setPlans] = useState([]);
-    console.log('console', plans && plans)
+    const navigate = useNavigate()
+
     const handleBack = (event) => {
         event.preventDefault();
-        // goBack(navigate)
+        goBack(navigate)
     }
 
     const showPlans = () => {
         axios.get(`${url}plans`)
             .then((res) => {
-                // console.log(res.data)
+                console.log(res.data)
                 setPlans(res.data.getPlans)
             })
             .catch((er) => {
@@ -27,21 +32,25 @@ export const Plans = () => {
 
     const list = plans && plans.map((p) => {
         return (
-            <div key={p.codigo}>
-                <div>
-                    <p>Registro: {p.registro}</p>
-                    <p>Nome: {p.nome}</p>
-                    <p>Código: {p.codigo}</p>
-                </div>
-            </div>
+            <Card style={{ width: '18rem' }}>
+                <Card.Body>
+                    <Card.Title>{p.nome}</Card.Title>
+                    <Card.Text>
+                        Registro: {p.registro}
+                        <br />
+                        Código: {p.codigo}
+                    </Card.Text>
+                </Card.Body>
+            </Card>
         )
     })
 
     return (
-        <div>
-            <button onClick={handleBack}>Voltar</button>
-            <h2>Planos</h2>
+        <DivMain>
+            <TitleH2>Planos disponíveis</TitleH2>
             {list}
-        </div>
+            <br />
+            <button onClick={handleBack}>Voltar para a página inicial</button>
+        </DivMain>
     )
 }

@@ -4,15 +4,16 @@ import { useEffect, useState } from 'react';
 import { url } from './../../constants/baseUrl';
 import { useNavigate } from 'react-router';
 import { goBack } from '../../router/Coordinator';
-
+import Card from 'react-bootstrap/Card';
+import { DivMain, TitleH2 } from './style'
 
 export const Prices = () => {
     const [prices, setPrices] = useState([])
-
+    const navigate = useNavigate()
 
     const handleBack = (event) => {
         event.preventDefault();
-        // goBack(navigate)
+        goBack(navigate)
     }
 
     const showPrices = () => {
@@ -28,15 +29,17 @@ export const Prices = () => {
 
     const list = prices && prices.map((p) => {
         return (
-            <div>
-                <div>
-                    <p>Código: {p.codigo}</p>
-                    <p>Número mínimo de beneficiadores desse plano: {p.minimo_vidas}</p>
-                    <p>Valor do plano para pessoas com idade até 17 anos: {p.faixa1}</p>
-                    <p>Valor do plano para pessoas com idade entre 18 e 40 anos: {p.faixa2}</p>
-                    <p>Valor do plano para pessoas com idade à partir de 41 anos: {p.faixa3}</p>
-                </div>
-            </div>
+            <Card style={{ width: '18rem' }}>
+                <Card.Body>
+                    <Card.Title>Código do plano: {p.codigo}</Card.Title>
+                    <Card.Text>
+                    <Card.Subtitle className="mb-2 text-muted">Número mínimo de beneficiadores desse plano: {p.minimo_vidas}</Card.Subtitle>
+                    <p>Valor do plano para pessoas com idade até 17 anos: {p.faixa1},00</p>
+                    <p>Valor do plano para pessoas com idade entre 18 e 40 anos: {p.faixa2},00</p>
+                    <p>Valor do plano para pessoas com idade à partir de 41 anos: {p.faixa3},00</p>
+                    </Card.Text>
+                </Card.Body>
+            </Card>
         )
     })
 
@@ -45,10 +48,12 @@ export const Prices = () => {
     }, [])
 
     return (
-        <div>
-            <h1> Lista de Preços </h1>
+        <DivMain>
+            <TitleH2> Lista de Preços </TitleH2>
             {list}
-        </div>
+            <br />
+            <button onClick={handleBack}>Voltar para a página inicial</button>
+        </DivMain>
     )
 
 }

@@ -34,5 +34,18 @@
             }
         ],
         "finalPrice": 22
+    },
+    {
+        "id": "32bd20a0-87af-4b59-b836-889e157c3e1f",
+        "quantity": 1,
+        "plan": 1,
+        "beneficiaries": [
+            {
+                "name": "Joana",
+                "age": 10,
+                "price": 10
+            }
+        ],
+        "finalPrice": 10
     }
 ]

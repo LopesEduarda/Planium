@@ -4,12 +4,13 @@ import { Prices } from '../pages/prices/Prices';
 import { Beneficiaries } from '../pages/beneficiaries/Beneficiaries';
 import { AddBeneficiaries } from '../pages/addBeneficiaries/AddBeneficiaries';
 import { Proposals } from '../pages/proposals/Proposals';
+import Home from "../pages/home/Home";
 
 const Router = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route index element={'/'}/>
+                <Route index element={<Home />}/>
                 <Route path='/plans' element={<Plans/>}/>
                 <Route path='/prices' element={<Prices/>}/>
                 <Route path='/beneficiaries' element={<Beneficiaries/>}/>

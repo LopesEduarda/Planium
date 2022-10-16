@@ -3,34 +3,22 @@ import { useForm } from "react-hook-form";
 import { goBack } from '../../router/Coordinator';
 import { useNavigate } from 'react-router';
 import { url } from './../../constants/baseUrl';
-import styled from 'styled-components'
+import { DivMain, TitleH2 } from './style'
+import Card from 'react-bootstrap/Card';
 
-export const EstilizacaoDivPrincipal = styled.div`
-        display: flex;
-        flex-direction: column;
-        input {
-                width: 200px;
-        }
-        select {
-                width: 200px;
-        }
-        button {
-                width: 250px;
-        }
-`
 
 export const AddBeneficiaries = () => {
 
-    const { register, handleSubmit, watch, resetField, formState: { errors } } = useForm({ defaultValues: { qntdBeneficiarios: 1 }, shouldUnregister: true })
+    const { register, handleSubmit, watch, resetField, formState: { errors } } = useForm({ defaultValues: { quantity: 1 }, shouldUnregister: true })
     // register: quais inputs do formulário vamos registrar
     // handleSubmit: lidará com o envio das informações que estão no nosso input
     // errors: aviso de erros na hora da validação 
 
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
 
     const handleBack = (event) => {
         event.preventDefault();
-        // goBack(navigate)
+        goBack(navigate)
     }
 
     const quantity = watch('quantity')
@@ -38,7 +26,6 @@ export const AddBeneficiaries = () => {
 
 
     const onSubmitForm = async (data) => {
-
         let chosenPlan = {
             "quantity": data.quantity,
             "plan": data.plan,
@@ -53,56 +40,43 @@ export const AddBeneficiaries = () => {
             .catch((error) => {
                 console.log(error)
             })
-
     }
 
     return (
-        <div>
-            <div className='card-post' >
-                <h1>Adicionar beneficiário</h1>
-
+        <DivMain>
+            <TitleH2>Cadastro de beneficiários</TitleH2>
+            <Card style={{ width: '30rem', padding: '10px' }}>
                 <form onSubmit={handleSubmit(data => onSubmitForm(data))}>
-                    <EstilizacaoDivPrincipal>
-                        <div className='fields'>
-                            <label>Plano escolhido:</label>
-                            <br />
-                            <input placeholder={"Plano escolhido"} type='number' {...register('plan', { required: 'É necessário digitar o número do plano escolhido!', valueAsNumber: true })} />
-                            <span style={{ color: 'red' }}>{errors?.plan?.message}</span>
-                        </div>
-                        <br />
 
-                        <div className='fields'>
-                            <label>Quantos beneficiários deseja cadastrar?</label>
-                            <br />
-                            <input placeholder={"Quantidade de beneficiários"} type='number' min={1}  {...register('quantity', { required: 'É necessário escolher quantos beneficiadores serão cadastrados no plano escolhido!', valueAsNumber: true })} />
-                            <span style={{ color: 'red' }}>{errors?.quantity?.message}</span>
-                        </div>
-                        <br />
+                    <p> Insira o número do plano desejado:</p>
+                    <input placeholder={"Plano desejado"} type='number' {...register('plan', { required: 'É necessário digitar o número do plano desejado!', valueAsNumber: true })} />
+                    <span style={{ color: 'red' }}>{errors?.plan?.message}</span>
+                    <br />
+                    <br />
+                    <p> Quantos beneficiários gostaria de cadastrar?</p>
+                    <input placeholder={"Quantidade de beneficiários"} type='number' min={1}  {...register('quantity', { required: 'É necessário escolher a quantidade de beneficiários que serão cadastrados!', valueAsNumber: true })} />
+                    <span style={{ color: 'red' }}>{errors?.quantity?.message}</span>
+                    <br />
+                    <br />
+                    <p> Preencha as informações de seus beneficiários: </p>
+                    {quantity > 0 && Array.from(Array(Number(quantity))).map((_, index) => {
+                        return (
+                            <div key={index}>
+                                <p> Digite as informações do beneficiário número: {index + 1}</p>
+                                <input placeholder={"Nome"} {...register(`beneficiaries.${index}.name`, { required: 'Digite o nome do beneficiário' })} />
+                                <span style={{ color: 'red' }}>{errors?.beneficiaries?.[index]?.name?.message}</span>
 
-                        <div className='fields'>
-                            <label>Preencha seus beneficiários:</label>
-                            <br />
-                            {quantity > 0 && Array.from(Array(Number(quantity))).map((_, index) => {
-                                return (
-                                    <div key={index}>
-                                        <p> Digite as informações do beneficiario número: {index + 1}</p>
-                                        <input placeholder={"Nome"} {...register(`beneficiaries.${index}.name`, { required: 'Digite o nome' })} />
-                                        <span style={{ color: 'red' }}>{errors?.beneficiaries?.[index]?.name?.message}</span>
-
-                                        <input placeholder={"Idade"} type='number' {...register(`beneficiaries.${index}.age`, { required: 'Digite a idade', valueAsNumber: true })} />
-                                        <span style={{ color: 'red' }}>{errors?.beneficiaries?.[index]?.age?.message}</span>
-                                        <br />
-                                        <br />
-                                    </div>
-                                )
-                            })}
-
-                            <button onClick={handleClick}>Cadastrar beneficiário</button>
-                        </div>
-                    </EstilizacaoDivPrincipal>
+                                <input placeholder={"Idade"} type='number' {...register(`beneficiaries.${index}.age`, { required: 'Digite a idade do beneficiário', valueAsNumber: true })} />
+                                <span style={{ color: 'red' }}>{errors?.beneficiaries?.[index]?.age?.message}</span>
+                            </div>
+                        )
+                    })}
                 </form>
-
-            </div>
-        </div>
+            </Card>
+            <br />
+            <button onClick={handleClick} > Cadastrar beneficiários </button>
+            <br />
+            <button onClick={handleBack}>Voltar para a página inicial</button>
+        </DivMain>
     )
 }

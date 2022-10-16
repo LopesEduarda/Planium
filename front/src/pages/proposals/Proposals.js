@@ -2,16 +2,17 @@ import axios from 'axios'
 import { useEffect, useState } from 'react';
 import { url } from './../../constants/baseUrl';
 import { useNavigate } from 'react-router';
+import { goBack } from '../../router/Coordinator';
+import Card from 'react-bootstrap/Card';
+import { DivMain, TitleH2 } from './style'
 
 export const Proposals = () => {
-
-    // const navigate = useNavigate()
     const [proposals, setProposals] = useState([])
-    console.log(proposals)
+    const navigate = useNavigate()
 
     const handleBack = (event) => {
         event.preventDefault();
-        // goBack(navigate)
+        goBack(navigate)
     }
 
     const showProposals = () => {
@@ -27,22 +28,22 @@ export const Proposals = () => {
 
     const list = proposals.map((p) => {
         return (
-            <div key={p.id}>
-                <div>
-                    <p>ID: {p.id}</p>
-                    <p>Plano escolhido: {p.plan}</p>
-                    <p>Número de Beneficiadores: {p.quantity}</p>
-                    <p>Beneficiários:</p>
+            <Card style={{ width: '20rem' }}>
+                <Card.Body>
+                    <Card.Title><p>Plano escolhido: {p.plan}</p></Card.Title>
+                    <Card.Text>
+                        <p>Número de Beneficiadores: {p.quantity}</p>
+                        <p>Beneficiários:</p>
 
-                    {p.beneficiaries.map((proposal) => {
-                        return (
-                            <p>Nome: {proposal.name}, Idade: {proposal.age}, Preço: {proposal.price}</p>
-                        )
-                    })}
-
-                    <p> Preço total da proposta: {p.finalPrice}</p>
-                </div>
-            </div>
+                        {p.beneficiaries.map((proposal) => {
+                            return (
+                                <p>Nome: {proposal.name}, Idade: {proposal.age}, Preço: {proposal.price}</p>
+                            )
+                        })}
+                        <p> Preço total da proposta: {p.finalPrice}</p>
+                    </Card.Text>
+                </Card.Body>
+            </Card>
         )
     })
 
@@ -51,10 +52,11 @@ export const Proposals = () => {
     }, [])
 
     return (
-        <div>
-            <button onClick={handleBack}>Voltar</button>
-            <h1>Propostas</h1>
+        <DivMain>
+            <TitleH2>Propostas</TitleH2>
             {list}
-        </div>
+            <br />
+            <button onClick={handleBack}>Voltar para a página inicial</button>
+        </DivMain>
     )
 }
