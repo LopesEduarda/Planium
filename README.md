@@ -49,9 +49,13 @@ Uma aplicação **full-stack** desenvolvida para a empresa Planium, com o objeti
 ```
 2. npm install
 ```
-3- npm run dev para rodar o back-end;
+* Para rodar o backend:
 ```
-4- npm run start para rodar o front-end.
+3.  npm run dev
+```
+* Para rodar o frontend:
+```
+4. npm run start para rodar o front-end.
 ```
 
 ## OBSERVAÇÕES: 
