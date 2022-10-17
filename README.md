@@ -55,7 +55,7 @@ Uma aplicação **full-stack** desenvolvida para a empresa Planium, com o objeti
 ```
 * Para rodar o frontend:
 ```
-4. npm run start para rodar o front-end.
+4. npm run start
 ```
 
 ## OBSERVAÇÕES: 
